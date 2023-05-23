@@ -1,11 +1,15 @@
 # sqlite-to-csv.sh
 
-# need sqlcipher (built from source), libssl-dev, tcl, gobjc++
+# don't really need this script anymore, i will keep it around just for reference for now
 
-# From https://unix.stackexchange.com/a/505009/413853
-sigBase="/mnt/c/Users/DANKINAH/AppData/Roaming/Signal/";
+# first install libssl-dev, tcl, gobjc++
+# then install sqlcipher (built from source) https://github.com/sqlcipher/sqlcipher
+
+#sigBase="/mnt/c/Users/DANKINAH/AppData/Roaming/Signal/";
+sigBase="/mnt/c/Users/daniel/AppData/Roaming/Signal/";
 key=$( /usr/bin/jq -r '."key"' ${sigBase}config.json );
-db="/mnt/c/Users/DANKINAH/AppData/Roaming/Signal/sql/db.sqlite";
-clearTextMsgs="${sigBase}backup-desktop.csv";
+#db="/mnt/c/Users/DANKINAH/AppData/Roaming/Signal/sql/db.sqlite";
+db="/mnt/c/Users/daniel/AppData/Roaming/Signal/sql/db.sqlite";
+clearTextMsgs="${sigBase}copy.csv";
 
-/home/dankinah/sqlcipher/sqlcipher -list -noheader "$db" "PRAGMA key = \"x'"$key"'\";select json from messages;" > "$clearTextMsgs";
+/home/dankinah/sqlcipher/sqlcipher -readonly -list -noheader "$db" "PRAGMA key = \"x'"$key"'\";select json from messages;" > "$clearTextMsgs";
