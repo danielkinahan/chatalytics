@@ -1,3 +1,6 @@
 *.sqlite
 *.json
 *.csv
+db_20200825-20211226
+.gitignore
+db_20220104-20230518
